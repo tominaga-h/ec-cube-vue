@@ -1,114 +1,135 @@
-# EC-CUBE 4.3
+# EC-CUBE-VUE
 
-[![Unit test for EC-CUBE](https://github.com/EC-CUBE/ec-cube/actions/workflows/unit-test.yml/badge.svg?branch=4.3)](https://github.com/EC-CUBE/ec-cube/actions/workflows/unit-test.yml)
-[![E2E test for EC-CUBE](https://github.com/EC-CUBE/ec-cube/actions/workflows/e2e-test.yml/badge.svg?branch=4.3)](https://github.com/EC-CUBE/ec-cube/actions/workflows/e2e-test.yml)
-[![Plugin test for EC-CUBE](https://github.com/EC-CUBE/ec-cube/actions/workflows/plugin-test.yml/badge.svg?branch=4.3)](https://github.com/EC-CUBE/ec-cube/actions/workflows/plugin-test.yml)
-[![PHPStan](https://github.com/EC-CUBE/ec-cube/actions/workflows/phpstan.yml/badge.svg?branch=4.3)](https://github.com/EC-CUBE/ec-cube/actions/workflows/phpstan.yml)
-[![codecov](https://codecov.io/gh/EC-CUBE/ec-cube/branch/4.3/graph/badge.svg?token=BhnPjjvfwd)](https://codecov.io/gh/EC-CUBE/ec-cube)
+このリポジトリは、[SkipTheDragon/inertia-bundle](https://github.com/SkipTheDragon/inertia-bundle) を使用して**EC-CUBE4.3のフロントエンドにVueを利用**できるようにしたものです。
 
-[![Slack](https://img.shields.io/badge/slack-join%5fchat-brightgreen.svg?style=flat)](https://join.slack.com/t/ec-cube/shared_invite/enQtNDA1MDYzNDQxMTIzLTY5MTRhOGQ2MmZhMjQxYTAwMmVlMDc5MDU2NjJlZmFiM2E3M2Q0M2Y3OTRlMGY4NTQzN2JiZDBkNmQwNTUzYzc)
+## 特徴
 
-**4.2からの更新内容は[リリースノート](https://github.com/EC-CUBE/ec-cube/releases/tag/4.3.0)をご確認ください。**
+- VueのSFC(単一ファイルコンポーネント)を利用可能
+- TypeScriptサポート
+- Scssサポート
+- Webpack-Encoreを利用
+- PHPのコントローラーからVueコンポーネントに `Props` を設定可能
+- Twigも利用可能
 
-+ 本ドキュメントはEC-CUBEの開発者を主要な対象者としております。
-+ パッケージ版は[EC-CUBEオフィシャルサイト](https://www.ec-cube.net)で配布しています。
-+ カスタマイズやEC-CUBEの利用、仕様に関しては[開発コミュニティ](https://xoops.ec-cube.net)をご利用ください。
-+ 本体開発にあたって不明点などあれば[Issue](https://github.com/EC-CUBE/ec-cube/wiki/Issues%E3%81%AE%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95)をご利用下さい。
-+ EC-CUBE 3系の保守については、 [EC-CUBE/ec-cube3](https://github.com/EC-CUBE/ec-cube3/)にて開発を行っております。
-+ EC-CUBE 2系の保守については、 [EC-CUBE/ec-cube2](https://github.com/EC-CUBE/ec-cube2/)にて開発を行っております。
+## Docker環境
 
-## インストール
+`Makefile` を用意しているので、下記の通りDocker環境を操作できます。
 
-### EC-CUBE 4.3のインストール方法
+- `make up` - Dockerコンテナ起動
+- `make down` - Dockerコンテナ削除
+- `make logs` - Dockerコンテナのログを表示
+- `make shell` - EC-CUBEコンテナに `bash` で接続
+- `make node` - Nodejsコンテナに `bash` で接続
+- `make cc` - EC-CUBEコンテナでキャッシュクリア
 
-開発ドキュメントの [インストール方法](https://doc4.ec-cube.net/quickstart/install) の手順に従ってインストールしてください。
+## JavaScriptのビルド
 
-### CSS の編集・ビルド方法
+EC-CUBE4.3から、EC-CUBEのコンテナから **Node環境が別コンテナに分離**されました(`docker-compose.nodejs.yml`)。デフォルトでは `docker run` を使用しますが、コマンドが長くなるので `make node` でNodeコンテナに接続し、`npm` などのコマンドを実行する形にしました。
 
-[Sass](https://sass-lang.com) を使用して記述されています。
-Sass のソースコードは `html/template/{admin,default}/assets/scss` にあります。
-前提として [https://nodejs.org/ja/] より、 Node.js をインストールしておいてください。
+### ビルド手順
 
-以下のコマンドでビルドすることで、 `html/template/**/assets/css` に CSS ファイルが出力されます。
+1. `make up` でDockerコンテナ起動
+2. `make node` でNodeコンテナに接続
+3. `npm run build` でビルド実行
 
-```shell
-npm ci # 初回およびpackage-lock.jsonに変更があったとき
-npm run build # Sass のビルド
+## Vueコンポーネント利用方法
+
+### フォルダ構造
+
+`.vue` ファイルは `html/template/inertia/assets/vue` 配下に配置してください。`vue` 配下は以下のフォルダ構造になっています。
+
+```txt
+vue
+ ├── components
+ ├── layouts
+ └── pages
 ```
 
-[`docker compose` を使用している場合](https://doc4.ec-cube.net/quickstart/docker_compose_install)は以下のコマンドを実行してください
+- `components/` - Vueコンポーネントを配置
+- `layouts/` - ページのレイアウトを配置
+- `pages/` - PHPコントローラーからレンダリングする.vueファイルを配置
 
-``` shell
-# 初回およびpackage-lock.jsonに変更があったとき
-docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.nodejs.yml run --rm -T nodejs npm ci
-# Sass のビルド
-docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.nodejs.yml run --rm -T nodejs npm run build
+### コントローラーからVueコンポーネントをレンダリング
+
+`AbstractController` を拡張することで、コントローラー内で `$this->inertia->render` を使いVueコンポーネントをレンダリングできます。
+
+```php
+<?php
+
+namespace Customize\Controller;
+
+use Customize\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+class WelcomeController extends AbstractController
+{
+    /**
+     * @Route("/welcome", name="welcome", methods={"GET"})
+     */
+    public function index()
+    {
+        // 使用するtwigファイルを指定できる
+        $this->inertia->setRootView('welcome.twig');
+
+        // `welcome` は `html/template/inertia/assets/vue/pages/welcome.vue` を指す
+        return $this->inertia->render('welcome', [
+            // 連想配列でpropsを渡す
+            'name' => 'Hayato Tominaga',
+        ]);
+
+    }
+}
 ```
 
-### JavaScript のビルド方法
+### Twig
 
-フロントエンドで使用する JavaScript のライブラリは npm で管理されています。
-JavaScript のライブラリは webpack でバンドル/minifyされます。
-バンドルするライブラリを変更する場合は、テンプレートごとに以下の bundle.js を修正し、リビルドしてください。
-- [html/template/admin/assets/js/bundle.js](html/template/admin/assets/js/bundle.js)
-- [html/template/default/assets/js/bundle.js](html/template/default/assets/js/bundle.js)
-- [html/template/install/assets/js/bundle.js](html/template/default/install/js/bundle.js)
+`setRootView` で指定するTwigファイルには、**必ず記載が必要な情報**があります。
 
-```shell
-npm ci # 初回およびpackage-lock.jsonに変更があったとき
-npm run build # Sass 及び JavaScript のビルド
+```twig
+{% extends 'base.html.twig' %}
+
+{% block main %}
+  {{ inertia(page) }}
+{% endblock %}
 ```
 
-JavaScript ライブラリのみをビルドしたい場合は以下でも可能です。
+`base.html.twig` は `default_frame.twig` を拡張したInertia用のtwigファイルです。
 
-```shell
-npx webpack
+Vueを使う上で必ず指定が必要なのが
+
+```twig
+  {{ inertia(page) }}
 ```
 
-[`docker compose` を使用している場合](https://doc4.ec-cube.net/quickstart/docker_compose_install)は以下のコマンドを実行してください
+この `inertia(page)` です。
 
-``` shell
-# 初回およびpackage-lock.jsonに変更があったとき
-docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.nodejs.yml run --rm -T nodejs npm ci
-# Sass のビルド
-docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.nodejs.yml run --rm -T nodejs npm run build
-# JavaScript ライブラリのみのビルド
-docker compose -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.nodejs.yml run --rm -T nodejs npx webpack
-```
+### EC-CUBEのレイアウトを利用するためには
 
+Twigを利用しても、このままではEC-CUBEのレイアウトは表示されません。EC-CUBEのレイアウトを利用するためには `dtb_page` 及び `dtb_page_layout` にレコードの追加が必要です。
 
-### 動作確認環境
+#### dtb_page
 
-* Apache 2.4.x (mod_rewrite / mod_ssl 必須)
-* PHP 8.1.x / 8.2.x / 8.3.x
-* PostgreSQL 12.x or higher / MySQL 8.0.x
-* ブラウザー：Google Chrome
+|カラム名|値|
+|---|---|
+|master_page_id|NULL|
+|page_name|Welcome(ページ名)|
+|url|welcome(ページURL)|
+|file_name|welcome(twigファイル名)|
+|edit_type|2|
+|author|NULL|
+|description|NULL|
+|keyword|NULL|
+|create_date|now()|
+|update_date|now()|
+|meta_robots|NULL|
+|meta_tags|NULL|
+|discriminator_type|page|
 
-詳しくは開発ドキュメントの [システム要件](https://doc4.ec-cube.net/quickstart/requirement) をご確認ください。
+#### dtb_page_layout
 
-## ドキュメント
-
-### [EC-CUBE 4.x 開発ドキュメント@doc4.ec-cube.net](https://doc4.ec-cube.net/)
-
-
-EC-CUBE 4.x 系の仕様や手順、開発Tipsに関するドキュメントを掲載しています。
-修正や追記、新規ドキュメントの作成をいただく場合、以下のレポジトリからPullRequestをお送りください。
-[https://github.com/EC-CUBE/doc4.ec-cube.net](https://github.com/EC-CUBE/doc4.ec-cube.net)
-
-## 開発への参加
-
-EC-CUBE 4.3の不具合の修正、機能のブラッシュアップを目的として、継続的に開発を行っております。  
-コードのリファクタリング、不具合修正以外のPullRequestを送る際は、Pull Requestのコメントなどに意図を明確に記載してください。  
-
-Pull Requestの送信前に、Issueにて提議いただく事も可能です。
-Issuesの利用方法については、[こちら](https://github.com/EC-CUBE/ec-cube/wiki/Issues%E3%81%AE%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95)をご確認ください。
-
-[Slack](https://join.slack.com/t/ec-cube/shared_invite/enQtNDA1MDYzNDQxMTIzLTY5MTRhOGQ2MmZhMjQxYTAwMmVlMDc5MDU2NjJlZmFiM2E3M2Q0M2Y3OTRlMGY4NTQzN2JiZDBkNmQwNTUzYzc)でも本体の開発に関する意見交換などを行っております。
-
-
-
-### コピーライトポリシーへの同意
-
-コードの提供・追加、修正・変更その他「EC-CUBE」への開発の御協力（Issue投稿、Pull Request投稿など、GitHub上での活動）を行っていただく場合には、
-[EC-CUBEのコピーライトポリシー](https://github.com/EC-CUBE/ec-cube/wiki/EC-CUBE%E3%81%AE%E3%82%B3%E3%83%94%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%88%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC)をご理解いただき、ご了承いただく必要がございます。
-Issueの投稿やPull Requestを送信する際は、EC-CUBEのコピーライトポリシーに同意したものとみなします。
+|カラム名|値|
+|---|---|
+|page_id|(dtb_pageの該当ID)|
+|layout_id|2|
+|sort_no|(sort_noの最大値+1)|
+|discriminator_type|pagelayout|
