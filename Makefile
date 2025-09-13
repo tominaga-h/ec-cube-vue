@@ -8,3 +8,5 @@ cc:
 	docker compose exec ec-cube php bin/console cache:clear --no-warmup
 logs:
 	docker compose logs -f
+node:
+	docker compose exec nodejs bash
