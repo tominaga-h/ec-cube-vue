@@ -3,6 +3,6 @@ up:
 down:
 	docker compose down --remove-orphans
 shell:
-	docker compose exec ec-cube bash
+	docker compose exec -u www-data ec-cube bash
 cc:
 	docker compose exec ec-cube php bin/console cache:clear --no-warmup
