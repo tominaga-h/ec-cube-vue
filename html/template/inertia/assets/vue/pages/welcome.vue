@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DefaultLayout from '@/layouts/default.vue';
+import EcHeading from '@/components/EcHeading.vue';
 
 interface Props {
   name: string;
@@ -14,12 +15,9 @@ defineOptions({
 
 <template>
   <div>
-    <h1 class="heading">Welcome {{ props.name }}!</h1>
+    <EcHeading :msg="`Welcome ${props.name}!`" />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.heading {
-  font-size: 100px;
-}
 </style>
