@@ -6,3 +6,5 @@ shell:
 	docker compose exec -u www-data ec-cube bash
 cc:
 	docker compose exec ec-cube php bin/console cache:clear --no-warmup
+logs:
+	docker compose logs -f
