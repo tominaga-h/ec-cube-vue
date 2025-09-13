@@ -35,6 +35,7 @@ services:
       DATABASE_CHARSET: 'utf8'
       MAILER_DSN: "smtp://mailcatcher:1025"
       ECCUBE_AUTH_MAGIC: "<change.me>"
+      DEBUG_MODE_ALERT_DISABLE: true
       # TRUSTED_HOSTS: '^127.0.0.1$$,^localhost$$'
       # ECCUBE_LOCALE: "ja"
       # ECCUBE_TIMEZONE: "Asia/Tokyo"

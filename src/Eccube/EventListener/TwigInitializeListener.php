@@ -236,6 +236,7 @@ class TwigInitializeListener implements EventSubscriberInterface
         $this->twig->addGlobal('title', $Page->getName());
         $this->twig->addGlobal('isMaintenance', $this->systemService->isMaintenanceMode());
         $this->twig->addGlobal('isDebugMode', env('APP_DEBUG'));
+        $this->twig->addGlobal('isDebugModeAlertDisbale', $this->eccubeConfig['eccube_debug_mode_alert_disable']);
     }
 
     public function setAdminGlobals(RequestEvent $event)
