@@ -1,0 +1,25 @@
+---
+description: makeコマンド
+globs:
+alwaysApply: true
+---
+
+# makeコマンド
+
+Docker環境を構築・削除等操作をする場合は `make` コマンドを利用してください。
+
+## `make up`
+
+`make up` でDocker環境を構築します。
+
+## `make down`
+
+`make down` でDocker環境を削除します。
+
+## `make shell`
+
+`make shell` でメインのEC-CUBEコンテナに `bash` で接続できます。
+
+## `make logs`
+
+`make logs` でログを確認できます。 終了するときは `Ctrl+C` を入力してください。
