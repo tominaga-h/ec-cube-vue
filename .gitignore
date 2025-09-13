@@ -28,6 +28,7 @@ node_modules
 !/html/template/admin
 !/html/template/default
 !/html/template/install
+!/html/template/inertia
 /html/user_data/*
 !/html/user_data/.gitkeep
 !/html/user_data/assets/css/customize.css
@@ -50,3 +51,10 @@ node_modules
 /.php-cs-fixer.cache
 /.php-cs-fixer.*.php
 ###< friendsofphp/php-cs-fixer ###
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/./build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###

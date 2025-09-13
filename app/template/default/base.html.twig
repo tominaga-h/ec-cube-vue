@@ -1,0 +1,14 @@
+{% extends 'default_frame.twig' %}
+
+{% block stylesheet %}
+  {{ encore_entry_link_tags('inertia') }}
+{% endblock %}
+
+{% block main %}
+  <div>base.html.twig</div>
+  {{ inertia(page) }}
+{% endblock %}
+
+{% block javascript %}
+  {{ encore_entry_script_tags('inertia') }}
+{% endblock %}

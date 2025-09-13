@@ -4,6 +4,9 @@ const webpack = require('webpack')
 const webpackConfig = require('../../webpack.config.js')
 
 module.exports = () => {
-  return webpackStream(webpackConfig, webpack).on('error', (e) => this.emit('end'))
+  return webpackStream(webpackConfig, webpack)
+    .on('error', function(e) {
+      this.emit('end')
+    })
     .pipe(gulp.dest('html/bundle'))
 };
