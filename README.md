@@ -10,6 +10,7 @@
 - Webpack-Encoreを利用
 - PHPのコントローラーからVueコンポーネントに `Props` を設定可能
 - Twigも利用可能
+- Vuetifyサポート
 
 ## Docker環境
 
