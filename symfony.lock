@@ -389,6 +389,18 @@
     "setasign/fpdi-tcpdf": {
         "version": "v2.0.0"
     },
+    "skipthedragon/inertia-bundle": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "1a4b069057491f799e12a412810180eefd622fcf"
+        },
+        "files": [
+            "app/config/eccube/packages/inertia.yaml"
+        ]
+    },
     "skorp/detect-incompatible-samesite-useragents": {
         "version": "1.0.0"
     },
