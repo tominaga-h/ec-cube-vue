@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  adminer:
+    image: adminer:4.7.5
+    ports:
+      - 8081:8080
+    depends_on:
+      - mysql
+    networks:
+      - backend
+    volumes:
+      - ./adminer/adminer.css:/var/www/html/adminer.css
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
