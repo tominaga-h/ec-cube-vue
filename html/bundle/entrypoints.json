@@ -1,0 +1,43 @@
+{
+  "entrypoints": {
+    "front": {
+      "js": [
+        "/html/bundle/js/runtime.cf93c6708ebd4494a1be.js",
+        "/html/bundle/js/336.dd353d09fdfcfb325396.js",
+        "/html/bundle/js/759.bafacf1929f877344c6d.js",
+        "/html/bundle/js/front.656b6bf149c94e18e306.js"
+      ],
+      "css": [
+        "/html/bundle/css/front.27182ae7ce9a75f8bedd.css"
+      ]
+    },
+    "admin": {
+      "js": [
+        "/html/bundle/js/runtime.cf93c6708ebd4494a1be.js",
+        "/html/bundle/js/336.dd353d09fdfcfb325396.js",
+        "/html/bundle/js/340.b29a6912a9a502ef7a40.js",
+        "/html/bundle/js/admin.2b612a4fabbb1028427c.js"
+      ],
+      "css": [
+        "/html/bundle/css/340.7d5fcaf4f950993f62ed.css"
+      ]
+    },
+    "install": {
+      "js": [
+        "/html/bundle/js/runtime.cf93c6708ebd4494a1be.js",
+        "/html/bundle/js/336.dd353d09fdfcfb325396.js",
+        "/html/bundle/js/install.07b24673de5cf17f0b27.js"
+      ],
+      "css": [
+        "/html/bundle/css/638.89dc0b4947daa9f1b5b6.css"
+      ]
+    },
+    "inertia": {
+      "js": [
+        "/html/bundle/js/runtime.cf93c6708ebd4494a1be.js",
+        "/html/bundle/js/937.95db4a7aed5f66f8f50a.js",
+        "/html/bundle/js/inertia.427a20bb0a6879b2327a.js"
+      ]
+    }
+  }
+}

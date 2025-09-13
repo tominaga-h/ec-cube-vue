@@ -889,10 +889,6 @@ include /assets/tmpl/components/directory.pug
 
 Styleguide 7.1
 */
-.c-directoryTree--register {
-  max-height: 300px;
-  overflow: scroll;
-}
 .c-directoryTree--register li {
   display: flex;
   flex-wrap: wrap;
@@ -926,6 +922,10 @@ Styleguide 7.1
 }
 .c-directoryTree--register ul > li > ul li:last-of-type > label::before {
   content: "└";
+}
+.c-directoryTree--register {
+  max-height: 300px;
+  overflow: scroll;
 }
 .c-directoryTree--register input {
   display: block;
