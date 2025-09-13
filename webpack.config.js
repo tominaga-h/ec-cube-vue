@@ -1,6 +1,7 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
 const ComponentsPlugin = require('unplugin-vue-components/webpack');
+const { Vuetify3Resolver } = require('unplugin-vue-components/resolvers');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment('production');
@@ -57,6 +58,7 @@ Encore
     deep: true,
     dts: 'html/template/inertia/assets/vue/components.d.ts', // 型定義を自動生成（任意）
     directoryAsNamespace: false, // サブフォルダ名をプレフィクスにしたい場合は true
+    resolvers: [Vuetify3Resolver()],
   }))
 
   // === ファイル名（任意で整理） ===

@@ -9,5 +9,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     EcHeading: typeof import('./components/EcHeading.vue')['default']
+    VBtn: typeof import('vuetify/components')['VBtn']
+    VCard: typeof import('vuetify/components')['VCard']
+    VCol: typeof import('vuetify/components')['VCol']
+    VRow: typeof import('vuetify/components')['VRow']
   }
 }
