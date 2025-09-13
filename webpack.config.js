@@ -17,9 +17,12 @@ Encore
   .addEntry('inertia', './html/template/inertia/assets/vue/app.ts')
 
   // === ローダ/機能 ===
-  .enableVueLoader()            // .vue (SFC)
-  .enableTypeScriptLoader()     // .ts / <script lang="ts">
-  .enableSassLoader()           // .scss / <style lang="scss">
+  .enableVueLoader()
+  .enableTypeScriptLoader(opts => {
+    opts.appendTsSuffixTo = [/\.vue$/];
+  })
+  .enableTypeScriptLoader()
+  .enableSassLoader()
 
   // 画像/フォント（旧 url-loader 相当）
   .addLoader({

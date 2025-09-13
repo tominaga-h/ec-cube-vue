@@ -12,15 +12,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["html/template/inertia/assets/vue/*"]
-    },
+    }
   },
   "include": [
     "html/template/inertia/assets/vue/**/*"
   ],
-  "alias": {
-    "@": "html/template/inertia/assets/vue"
-  },
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
