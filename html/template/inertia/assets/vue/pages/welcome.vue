@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import DefaultLayout from '@/layouts/default.vue';
-import EcHeading from '@/components/EcHeading.vue';
 
 interface Props {
   name: string;

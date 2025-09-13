@@ -1,5 +1,6 @@
 const path = require('path');
 const Encore = require('@symfony/webpack-encore');
+const ComponentsPlugin = require('unplugin-vue-components/webpack');
 
 if (!Encore.isRuntimeEnvironmentConfigured()) {
   Encore.configureRuntimeEnvironment('production');
@@ -48,6 +49,15 @@ Encore
     'jquery': path.join(__dirname, 'node_modules', 'jquery'),
     '@': path.resolve(__dirname, 'html/template/inertia/assets/vue')
   })
+
+  // === コンポーネント自動登録 ===
+  .addPlugin(ComponentsPlugin({
+    dirs: ['html/template/inertia/assets/vue/components'],
+    extensions: ['vue'],
+    deep: true,
+    dts: 'html/template/inertia/assets/vue/components.d.ts', // 型定義を自動生成（任意）
+    directoryAsNamespace: false, // サブフォルダ名をプレフィクスにしたい場合は true
+  }))
 
   // === ファイル名（任意で整理） ===
   .configureFilenames({
